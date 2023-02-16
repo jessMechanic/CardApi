@@ -19,9 +19,9 @@ namespace CardApi.Migrations
 
             modelBuilder.Entity("CardApi.Models.Account.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("UserName")
                         .IsRequired()
@@ -34,12 +34,12 @@ namespace CardApi.Migrations
 
             modelBuilder.Entity("CardApi.Models.Cards.Card", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
-                    b.Property<int?>("DeckId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid?>("DeckId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -57,18 +57,18 @@ namespace CardApi.Migrations
 
             modelBuilder.Entity("CardApi.Models.Cards.Deck", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("INTEGER");
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Deck");
+                    b.ToTable("Decks");
                 });
 
             modelBuilder.Entity("CardApi.Models.Cards.Card", b =>

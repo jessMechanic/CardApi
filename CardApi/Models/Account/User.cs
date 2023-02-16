@@ -1,13 +1,15 @@
 ﻿using CardApi.Models.Cards;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CardApi.Models.Account
 {
     public class User
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string UserName { get; set; }
 
-        public List<Deck>? Decks { get; set; }
+        [AllowNull]
+        public  List<Deck>? Decks { get; set; }
 
     }
 }

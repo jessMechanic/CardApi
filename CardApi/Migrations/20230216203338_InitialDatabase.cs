@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -14,8 +15,7 @@ namespace CardApi.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -24,18 +24,17 @@ namespace CardApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Deck",
+                name: "Decks",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: true)
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    UserId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Deck", x => x.Id);
+                    table.PrimaryKey("PK_Decks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Deck_Users_UserId",
+                        name: "FK_Decks_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id");
@@ -45,19 +44,18 @@ namespace CardApi.Migrations
                 name: "Cards",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Type = table.Column<int>(type: "INTEGER", nullable: false),
-                    DeckId = table.Column<int>(type: "INTEGER", nullable: true)
+                    DeckId = table.Column<Guid>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cards", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Cards_Deck_DeckId",
+                        name: "FK_Cards_Decks_DeckId",
                         column: x => x.DeckId,
-                        principalTable: "Deck",
+                        principalTable: "Decks",
                         principalColumn: "Id");
                 });
 
@@ -67,8 +65,8 @@ namespace CardApi.Migrations
                 column: "DeckId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Deck_UserId",
-                table: "Deck",
+                name: "IX_Decks_UserId",
+                table: "Decks",
                 column: "UserId");
         }
 
@@ -79,7 +77,7 @@ namespace CardApi.Migrations
                 name: "Cards");
 
             migrationBuilder.DropTable(
-                name: "Deck");
+                name: "Decks");
 
             migrationBuilder.DropTable(
                 name: "Users");
