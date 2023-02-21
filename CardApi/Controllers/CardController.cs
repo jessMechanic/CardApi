@@ -19,10 +19,6 @@ namespace CardApi.Controllers
         {
             DB = db;
             _logger = logger;
-
-
-
-            DB.SaveChanges();
         }
 
         [HttpGet]

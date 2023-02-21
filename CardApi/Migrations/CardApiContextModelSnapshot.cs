@@ -17,6 +17,33 @@ namespace CardApi.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.3");
 
+            modelBuilder.Entity("CardApi.Models.Account.Message", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("SenderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("TimeStap")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("CardApi.Models.Account.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -69,6 +96,15 @@ namespace CardApi.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Decks");
+                });
+
+            modelBuilder.Entity("CardApi.Models.Account.Message", b =>
+                {
+                    b.HasOne("CardApi.Models.Account.User", "Sender")
+                        .WithMany()
+                        .HasForeignKey("SenderId");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("CardApi.Models.Cards.Card", b =>
