@@ -16,6 +16,7 @@ namespace CardApi.Models
 
         public DbSet<Deck> Decks { get; set; }
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             DbPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.Personal)}{Path.DirectorySeparatorChar}smart_contracts.db";

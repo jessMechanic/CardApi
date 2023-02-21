@@ -10,6 +10,7 @@ namespace CardApi.Models.Account
 
         [AllowNull]
         public  List<Deck>? Decks { get; set; }
+        public string PassHash { get; set; }
 
     }
 }
