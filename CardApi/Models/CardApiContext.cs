@@ -1,5 +1,6 @@
 ﻿using CardApi.Models.Account;
 using CardApi.Models.Cards;
+using CardApi.Models.Matches;
 using Microsoft.EntityFrameworkCore;
 
 namespace CardApi.Models
@@ -9,7 +10,7 @@ namespace CardApi.Models
 
         public string DbPath { get; set; }
 
-        
+        public DbSet<Match> matches { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
