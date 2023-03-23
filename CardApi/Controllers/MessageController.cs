@@ -1,6 +1,5 @@
 ﻿using CardApi.Models;
 using CardApi.Models.Account;
-using CardApi.Models.Cards;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,8 +10,8 @@ namespace CardApi.Controllers
     public class MessageController : ControllerBase
     {
         public CardApiContext DB { get; private set; }
-        private ILogger<CardController> _logger;
-        public MessageController(ILogger<CardController> logger, CardApiContext db)
+        private ILogger<MessageController> _logger;
+        public MessageController(ILogger<MessageController> logger, CardApiContext db)
         {
             DB = db;
             _logger = logger;
@@ -21,11 +20,11 @@ namespace CardApi.Controllers
         [HttpGet]
         public IEnumerable<Message> Get()
         {
-            return DB.Messages.Include(m => m.Sender);
+            return DB.Messages.Include(m => m.SenderId);
         }
 
 
-        [HttpPost("/user/{userId}/messages")]
+        [HttpPost("/user/userId/messages")]
         public IActionResult AddCard(Message message, Guid userId)
         {
             if (message == null)
@@ -42,13 +41,9 @@ namespace CardApi.Controllers
                 return BadRequest();
             }
 
-            User sender = DB.Users.Find(userId);
-            if (sender == null)
-            {
-                return NotFound();
-            }
+         
 
-            DB.Messages.Add(new Message() { Body = message.Body, Title = message.Title, Sender = sender,TimeStap = DateTime.Now});
+            DB.Messages.Add(new Message() { Body = message.Body, Title = message.Title, SenderId = userId,TimeStap = DateTime.Now});
             DB.SaveChanges();
             return Ok();
         }
