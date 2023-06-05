@@ -26,7 +26,7 @@ namespace CardApi.Controllers
 
 
         [HttpPost("/user/{userId}/messages")]
-        public IActionResult AddCard(Message message, Guid userId)
+        public IActionResult AddMessage(Message message, Guid userId)
         {
             if (message == null)
             {
